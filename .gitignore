@@ -1,3 +1,5 @@
 node_modules
 test-results
 playwright-report
+.verity-runner.mjs
+package-lock.json

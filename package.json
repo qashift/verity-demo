@@ -6,8 +6,9 @@
   "scripts": {
     "serve": "npx --yes serve public -l 4321",
     "test": "playwright test",
-    "verity:fast": "npx --yes @qashift/verity run --tier fast --token $VERITY_INGEST_TOKEN",
-    "verity:full": "npx --yes @qashift/verity run --tier full --token $VERITY_INGEST_TOKEN"
+    "fetch-runner": "curl -sL https://raw.githubusercontent.com/qashift/verity-action/v1/verity.mjs -o .verity-runner.mjs",
+    "verity:fast": "npm run fetch-runner && node .verity-runner.mjs run --tier fast --token $VERITY_INGEST_TOKEN",
+    "verity:full": "npm run fetch-runner && node .verity-runner.mjs run --tier full --token $VERITY_INGEST_TOKEN"
   },
   "devDependencies": {
     "@playwright/test": "^1.50.0"
