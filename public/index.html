@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verity Demo Shop</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+      header { display: flex; justify-content: space-between; align-items: center; }
+      .product { border: 1px solid #ddd; padding: 16px; margin-top: 16px; }
+      button { cursor: pointer; padding: 8px 14px; border: 1px solid #333; background: #fff; }
+      .primary { background: #4f46e5; color: #fff; border-color: #4f46e5; }
+      [hidden] { display: none; }
+      .success { color: #059669; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Verity Demo Shop</h1>
+      <span>Cart: <span data-testid="cart-count">0</span></span>
+    </header>
+
+    <main>
+      <div class="product">
+        <h2>Indigo T-Shirt</h2>
+        <p>₹999</p>
+        <!-- A user-facing button — Verity prefers role/name locators over this testid. -->
+        <button class="primary" data-testid="add-to-cart" aria-label="Add Indigo T-Shirt to cart">Add to cart</button>
+      </div>
+
+      <section id="checkout" hidden style="margin-top: 24px">
+        <h2>Checkout</h2>
+        <label>Card number <input aria-label="Card number" value="4111 1111 1111 1111" /></label>
+        <div style="margin-top: 12px">
+          <button class="primary" id="place-order">Place order</button>
+        </div>
+      </section>
+
+      <p id="confirmation" class="success" hidden role="status">Order placed — thank you!</p>
+    </main>
+
+    <script>
+      let count = 0;
+      const cart = document.querySelector('[data-testid="cart-count"]');
+      document.querySelector('[data-testid="add-to-cart"]').addEventListener('click', () => {
+        cart.textContent = String(++count);
+        document.getElementById('checkout').hidden = false;
+      });
+      document.getElementById('place-order').addEventListener('click', () => {
+        document.getElementById('confirmation').hidden = false;
+        document.getElementById('checkout').hidden = true;
+      });
+    </script>
+  </body>
+</html>

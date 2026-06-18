@@ -1,0 +1,33 @@
+name: Verity
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # needed for diff-aware Quick check
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+
+      # Quick check (diff-aware subset) on PRs — a fast sanity check, never blocks.
+      - name: Verity — Quick check
+        if: github.event_name == 'pull_request'
+        uses: qashift/verity-action@v1
+        with:
+          tier: fast
+          token: ${{ secrets.VERITY_INGEST_TOKEN }}
+
+      # Full regression on merge to main — the safety net.
+      - name: Verity — Full regression
+        if: github.ref == 'refs/heads/main'
+        uses: qashift/verity-action@v1
+        with:
+          tier: full
+          token: ${{ secrets.VERITY_INGEST_TOKEN }}
