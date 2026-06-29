@@ -44,3 +44,5 @@ VERITY_INGEST_TOKEN=xxx npm run verity:full
 ## C — Let an FDE own it
 
 On the Managed (FDE) plan, a forward-deployed engineer converts these specs into a maintained Page Object Model, keeps them green as the app changes, and triages every failure. AI writes, the engineer verifies.
+
+<!-- verity ci validation 2026-06-29T11:17:52Z -->
