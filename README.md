@@ -1,4 +1,4 @@
-# Verity Demo Repo
+# Verity Demo
 
 A tiny shop + Playwright suite to try **Verity** two ways: in the **cloud** (get the feel) and in **CI** (the real thing).
 
